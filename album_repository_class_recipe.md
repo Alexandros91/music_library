@@ -176,7 +176,19 @@ album.id # =>  1
 album.title # =>  'Vavel'
 album.release_year # =>  2016
 album.artist_id # =>  2
-# Add more examples for each method
+
+# 3
+# Get another album
+
+repo = AlbumRepository.new
+
+album = repo.find(2)
+
+album.id # =>  2
+album.title # =>  'Klima Tropiko'
+album.release_year # =>  1996
+album.artist_id # =>  1
+
 ```
 
 Encode this example as a test.

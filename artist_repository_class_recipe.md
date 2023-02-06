@@ -132,14 +132,32 @@ class ArtistRepository
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(artist)
-  # end
+  # Inserts a new artist record
+  # Takes an Artist object in argument
+  def create(artist)
+    # Executes the SQL query:
+    # INSERT into artists (name, genre) VALUES ($1, $2);
 
-  # def update(artist)
-  # end
+    # Doesn't need to return anything (only creates the record).
+  end
 
-  # def delete(artist)
-  # end
+# Deletes an artist record
+# given its id
+  def update(artist)
+  # Executes the SQL query:
+  # DELETE from artists WHERE id = $1;
+
+  # Doesn't need to return anything (only deletes the record).
+  end
+
+  # Updates a single record
+  # Takes an artist object (with the updates fields)
+  def delete(artist)
+  # Executes the SQL query:
+  # UPDATE artists SET name = $1, genre = $2 WHERE id = $3;
+
+  # Doesn't need to return anything (only updates the record).
+  end
 end
 ```
 
@@ -175,6 +193,50 @@ artist = repo.find(1)
 artist.id # =>  1
 artist.name # =>  'Anna Vissi'
 artist.genre # =>  'Pop'
+
+# 3
+# Get another artist
+
+repo = ArtistRepository.new
+
+artist = repo.find(2)
+
+artist.id # =>  2
+artist.name # =>  'Natassa Mpofiliou'
+artist.genre # =>  'Entexno'
+
+# 4
+# Create a new artist
+repo = ArtistRepository.new
+new_artist = Artist.new
+new_artist.name = 'Xaris Alexiou'
+new_artist.genre = 'Laiko'
+repo.create(new_artist)
+artists = repo.all
+
+artists.length # => 3
+artists.last.id # => 3
+artists.last.name # => 'Xaris Alexiou'
+artists.last.genre # => 'Laiko'
+
+# 5
+# Create another artist
+repo = ArtistRepository.new
+new_artist_1 = Artist.new
+new_artist_1.name = 'Xaris Alexiou'
+new_artist_1.genre = 'Laiko'
+repo.create(new_artist_1)
+new_artist_2 = Artist.new
+new_artist_2.name = 'Giorgos Ntalaras'
+new_artist_2.genre = 'Rempetiko'
+repo.create(new_artist_2)
+artists = repo.all
+
+artists.length # => 4
+artists.last.id # => 4
+artists.last.name # => 'Giorgos Ntalaras'
+artists.last.genre # => 'Rempetiko'
+
 
 # Add more examples for each method
 ```

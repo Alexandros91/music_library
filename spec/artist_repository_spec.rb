@@ -20,7 +20,6 @@ RSpec.describe ArtistRepository do
       artists = repo.all
 
       expect(artists.length).to eq 2
-
       expect(artists.first.id).to eq 1
       expect(artists.first.name).to eq 'Anna Vissi'
       expect(artists.first.genre).to eq 'Pop'
@@ -46,6 +45,40 @@ RSpec.describe ArtistRepository do
       expect(artist.id).to eq 2
       expect(artist.name).to eq 'Natassa Mpofiliou'
       expect(artist.genre).to eq 'Entexno'
+    end
+  end
+
+  describe '#create' do
+    it 'adds Xaris Alexiou as a new artist in the artists table' do
+      repo = ArtistRepository.new
+      new_artist = Artist.new
+      new_artist.name = 'Xaris Alexiou'
+      new_artist.genre = 'Laiko'
+      repo.create(new_artist)
+      artists = repo.all
+
+      expect(artists.length).to eq 3
+      expect(artists.last.id).to eq 3
+      expect(artists.last.name).to eq 'Xaris Alexiou'
+      expect(artists.last.genre).to eq 'Laiko'
+    end
+
+    it 'adds Giorgos Ntalaras as another artist in the artists table' do
+      repo = ArtistRepository.new
+      new_artist_1 = Artist.new
+      new_artist_1.name = 'Xaris Alexiou'
+      new_artist_1.genre = 'Laiko'
+      repo.create(new_artist_1)
+      new_artist_2 = Artist.new
+      new_artist_2.name = 'Giorgos Ntalaras'
+      new_artist_2.genre = 'Rempetiko'
+      repo.create(new_artist_2)
+      artists = repo.all
+
+      expect(artists.length).to eq 4
+      expect(artists.last.id).to eq 4
+      expect(artists.last.name).to eq 'Giorgos Ntalaras'
+      expect(artists.last.genre).to eq 'Rempetiko'
     end
   end
 end

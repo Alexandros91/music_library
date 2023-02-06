@@ -39,10 +39,15 @@ class ArtistRepository
     return artist
   end
 
-  # Add more methods below for each operation you'd like to implement.
 
-  # def create(artist)
-  # end
+  def create(artist)
+    sql = 'INSERT into artists (name, genre) VALUES ($1, $2);'
+    sql_params = [artist.name, artist.genre]
+
+    DatabaseConnection.exec_params(sql, sql_params)
+
+    return nil
+  end
 
   # def update(artist)
   # end
