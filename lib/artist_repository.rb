@@ -24,10 +24,19 @@ class ArtistRepository
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
-    # Executes the SQL query:
-    # SELECT id, name, genre FROM artists WHERE id = $1;
+    sql = 'SELECT id, name, genre FROM artists WHERE id = $1;'
+    sql_params = [id]
 
-    # Returns a single artist object.
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+
+    record = result_set[0]
+
+    artist = Artist.new
+    artist.id = record['id'].to_i
+    artist.name = record['name']
+    artist.genre = record['genre']
+
+    return artist
   end
 
   # Add more methods below for each operation you'd like to implement.

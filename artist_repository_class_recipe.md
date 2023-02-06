@@ -168,7 +168,7 @@ artists.first.genre # =>  'Pop'
 # 2
 # Get a single artist
 
-repo = artistRepository.new
+repo = ArtistRepository.new
 
 artist = repo.find(1)
 

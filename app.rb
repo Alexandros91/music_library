@@ -15,7 +15,8 @@ album_repository = AlbumRepository.new
 # album_repository.all.each do |album|
 #   p album
 # end
-
+artist = artist_repository.find(4)
 album = album_repository.find(3)
 
-puts "#{album.title} - #{album.release_year} - #{album.artist_id}"
+# puts "#{album.title} - #{album.release_year} - #{album.artist_id}"
+puts "#{artist.name} - #{artist.genre}"
