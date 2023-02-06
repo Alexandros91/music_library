@@ -26,10 +26,18 @@ class AlbumRepository
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
-    # Executes the SQL query:
-    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
+    sql = 'SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;'
+    sql_params = [id]
 
-    # Returns a single album object.
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+    record = result_set[0]
+    album = Album.new
+    album.id = record['id'].to_i
+    album.title = record['title']
+    album.release_year = record['release_year'].to_i
+    album.artist_id = record['artist_id'].to_i
+    
+    return album
   end
 
   # Add more methods below for each operation you'd like to implement.

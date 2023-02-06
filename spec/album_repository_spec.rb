@@ -27,5 +27,29 @@ RSpec.describe AlbumRepository do
       expect(albums.first.artist_id).to eq 2
     end
   end
+
+  describe '#find' do
+    it 'shows the album with the id 1' do
+      repo = AlbumRepository.new
+
+      album = repo.find(1)
+
+      expect(album.id).to eq 1
+      expect(album.title).to eq 'Vavel'
+      expect(album.release_year).to eq 2016
+      expect(album.artist_id).to eq 2
+    end
+
+    it 'shows the album with the id 2' do
+      repo = AlbumRepository.new
+
+      album = repo.find(2)
+
+      expect(album.id).to eq 2
+      expect(album.title).to eq 'Klima Tropiko'
+      expect(album.release_year).to eq 1996
+      expect(album.artist_id).to eq 1
+    end
+  end
  
 end
