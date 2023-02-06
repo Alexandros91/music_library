@@ -141,22 +141,22 @@ class ArtistRepository
     # Doesn't need to return anything (only creates the record).
   end
 
-# Deletes an artist record
-# given its id
-  def update(artist)
-  # Executes the SQL query:
-  # DELETE from artists WHERE id = $1;
-
-  # Doesn't need to return anything (only deletes the record).
-  end
-
   # Updates a single record
   # Takes an artist object (with the updates fields)
-  def delete(artist)
+  def update(artist)
   # Executes the SQL query:
   # UPDATE artists SET name = $1, genre = $2 WHERE id = $3;
 
   # Doesn't need to return anything (only updates the record).
+  end
+
+  # Deletes an artist record
+  # given its id
+  def delete(artist)
+  # Executes the SQL query:
+  # DELETE from artists WHERE id = $1;
+
+  # Doesn't need to return anything (only deletes the record).
   end
 end
 ```
@@ -238,7 +238,38 @@ artists.last.name # => 'Giorgos Ntalaras'
 artists.last.genre # => 'Rempetiko'
 
 
-# Add more examples for each method
+# 6
+# Update an existing artist
+repo = ArtistRepository.new
+artist = repo.find(1)
+artist.name = 'Anna Vissy'
+artist.genre = 'Elafrolaiko'
+repo.update(artist)
+
+updated_artist = repo.find(1)
+
+updated_artist.name # => 'Anna Vissy'
+updated_artist.genre # => 'Elafrolaiko'
+
+
+# 7
+# Update one value of an existing artist
+repo = ArtistRepository.new
+artist = repo.find(2)
+artist.genre = 'Mpalantes'
+repo.update(artist)
+
+updated_artist = repo.find(2)
+
+updated_artist.name # => 'Natassa Mpofiliou'
+updated_artist.genre # => 'Mpalantes'
+
+# 8
+# Delete an existing artist
+repo = ArtistRepository.new
+artist_to_delete = Artist.new
+
+
 ```
 
 Encode this example as a test.

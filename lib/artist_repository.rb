@@ -58,6 +58,12 @@ class ArtistRepository
     return nil
   end
 
-  # def delete(artist)
-  # end
+  def delete(artist)
+    sql = 'DELETE from artists WHERE id = $1;'
+    sql_params = [artist.id]
+
+    DatabaseConnection.exec_params(sql, sql_params)
+
+    return nil
+  end
 end

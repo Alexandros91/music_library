@@ -96,7 +96,7 @@ RSpec.describe ArtistRepository do
       expect(updated_artist.genre).to eq 'Elafrolaiko'
     end
 
-    it 'updates the values of the second artist' do
+    it 'updates the genre value of the second artist' do
       repo = ArtistRepository.new
       artist = repo.find(2)
       artist.genre = 'Mpalantes'
@@ -106,6 +106,32 @@ RSpec.describe ArtistRepository do
       
       expect(updated_artist.name).to eq 'Natassa Mpofiliou'
       expect(updated_artist.genre).to eq 'Mpalantes'
+    end
+  end
+
+  describe '#delete' do
+    it 'deletes an existing artist' do
+      repo = ArtistRepository.new
+      artist_to_delete = repo.find(1)
+
+      repo.delete(artist_to_delete)
+      artists = repo.all
+
+      expect(artists.length).to eq 1
+      expect(artists.first.id).to eq 2
+    end
+
+    it 'deletes both artists' do
+      repo = ArtistRepository.new
+      artist_1_to_delete = repo.find(1)
+      artist_2_to_delete = repo.find(2)
+
+      repo.delete(artist_1_to_delete)
+      repo.delete(artist_2_to_delete)
+
+      artists = repo.all
+
+      expect(artists.length).to eq 0
     end
   end
 end
