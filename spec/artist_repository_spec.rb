@@ -81,4 +81,31 @@ RSpec.describe ArtistRepository do
       expect(artists.last.genre).to eq 'Rempetiko'
     end
   end
+
+  describe '#update' do
+    it 'updates the values of the first artist' do
+      repo = ArtistRepository.new
+      artist = repo.find(1)
+      artist.name = 'Anna Vissy'
+      artist.genre = 'Elafrolaiko'
+      repo.update(artist)
+
+      updated_artist = repo.find(1)
+
+      expect(updated_artist.name).to eq 'Anna Vissy'
+      expect(updated_artist.genre).to eq 'Elafrolaiko'
+    end
+
+    it 'updates the values of the second artist' do
+      repo = ArtistRepository.new
+      artist = repo.find(2)
+      artist.genre = 'Mpalantes'
+      repo.update(artist)
+
+      updated_artist = repo.find(2)
+      
+      expect(updated_artist.name).to eq 'Natassa Mpofiliou'
+      expect(updated_artist.genre).to eq 'Mpalantes'
+    end
+  end
 end
