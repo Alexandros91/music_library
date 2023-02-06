@@ -14,7 +14,7 @@ RSpec.describe ArtistRepository do
   
 
   describe '#all' do
-    it 'shows all artist objects' do
+    it 'shows a list of all artists' do
       repo = ArtistRepository.new
 
       artists = repo.all
