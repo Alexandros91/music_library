@@ -267,7 +267,12 @@ updated_artist.genre # => 'Mpalantes'
 # 8
 # Delete an existing artist
 repo = ArtistRepository.new
-artist_to_delete = Artist.new
+artist_to_delete = repo.find(1)
+
+repo.delete(artist_to_delete)
+
+repo.length # => 1
+repo.first.id # => 2
 
 
 ```

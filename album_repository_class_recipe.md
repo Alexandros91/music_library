@@ -129,16 +129,32 @@ class AlbumRepository
     # Returns a single album object.
   end
 
-  # Add more methods below for each operation you'd like to implement.
+  # Creates a new album record
+  # Takes an album object as an argument
+  def create(album)
+    # Executes the SQL query:
+    # INSERT into albums (title, release_year, artist_id) VALUES ($1, $2, $3);
 
-  # def create(album)
-  # end
+    # Returns nothing (only creates the record)
+  end
 
-  # def update(album)
-  # end
+  # Updates an existing album record
+  # Takes a album object as an argument
+  def update(album)
+    # Executes the SQL query:
+    # UPDATE albums SET title = $1, release_year = $2, artist_id = $3 WHERE id = $4;
 
-  # def delete(album)
-  # end
+    # Returns nothing (only updates the record)
+  end
+
+  # Deletes an existing album record
+  # given its id
+  def delete(album)
+    # Executes the SQL query:
+    # DELETE FROM albums WHERE id = $1;
+
+    # Returns nothing (only deletes the record)
+  end
 end
 ```
 
@@ -188,6 +204,24 @@ album.id # =>  2
 album.title # =>  'Klima Tropiko'
 album.release_year # =>  1996
 album.artist_id # =>  1
+
+# 4
+# Create a new album
+
+repo = AlbumRepository.new
+new_album = Album.new
+new_album.id = 3
+new_album.title = 'I agapi einai zali'
+new_album.release_year = 1986
+new_album.artist_id = 3
+repo.create(new_album)
+albums = repo.all
+
+albums.length # =>  3
+albums.last.id # =>  3
+albums.last.title # =>  'I agapi einai zali'
+albums.last.release_year # =>  1986
+albums.last.artist_id # =>  3
 
 ```
 

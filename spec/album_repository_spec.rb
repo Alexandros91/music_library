@@ -51,5 +51,52 @@ RSpec.describe AlbumRepository do
       expect(album.artist_id).to eq 1
     end
   end
+
+  describe '#create' do
+    it 'adds a new album object to the repository' do
+      repo = AlbumRepository.new
+      new_album = Album.new
+      new_album.id = 3
+      new_album.title = 'O metoikos'
+      new_album.release_year = 1971
+      new_album.artist_id = 4
+      repo.create(new_album)
+      albums = repo.all
+
+      expect(albums.length).to eq 3
+      expect(albums.last.id).to eq 3
+      expect(albums.last.title).to eq 'O metoikos'
+      expect(albums.last.release_year).to eq 1971
+      expect(albums.last.artist_id).to eq 4
+    end
+
+    it 'adds multiple album objects to the repository' do
+      repo = AlbumRepository.new
+
+      new_album_1 = Album.new
+      new_album_1.id = 3
+      new_album_1.title = 'O metoikos'
+      new_album_1.release_year = 1971
+      new_album_1.artist_id = 4
+
+      new_album_2 = Album.new
+      new_album_2.id = 4
+      new_album_2.title = 'I agapi einai zali'
+      new_album_2.release_year = 1986
+      new_album_2.artist_id = 3
+
+      repo.create(new_album_1)
+      repo.create(new_album_2)
+      albums = repo.all
+
+      expect(albums.length).to eq 4
+      expect(albums.last.id).to eq 4
+      expect(albums.last.title).to eq 'I agapi einai zali'
+      expect(albums.last.release_year).to eq 1986
+      expect(albums.last.artist_id).to eq 3
+    end
+
+
+  end
  
 end
