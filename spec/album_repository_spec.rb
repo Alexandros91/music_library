@@ -96,6 +96,37 @@ RSpec.describe AlbumRepository do
       expect(albums.last.artist_id).to eq 3
     end
 
+    describe '#update' do
+      it 'updates an existing album' do
+        repo = AlbumRepository.new
+        album = repo.find(1)
+        album.title = 'Antidoto'
+        album.release_year = 1998
+        album.artist_id = 1
+
+        repo.update(album)
+        updated_album = repo.find(1)
+
+        expect(updated_album.title).to eq 'Antidoto'
+        expect(updated_album.release_year).to eq 1998
+        expect(updated_album.artist_id).to eq 1
+      end
+
+      it 'updates some values of an existing album' do
+        repo = AlbumRepository.new
+        album = repo.find(1)
+        album.title = 'I epoxi tou therismou'
+        album.release_year = 2020
+
+        repo.update(album)
+        updated_album = repo.find(1)
+
+        expect(updated_album.title).to eq 'I epoxi tou therismou'
+        expect(updated_album.release_year).to eq 2020
+        expect(updated_album.artist_id).to eq 2
+      end
+    end
+
 
   end
  

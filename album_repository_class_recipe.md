@@ -223,6 +223,21 @@ albums.last.title # =>  'I agapi einai zali'
 albums.last.release_year # =>  1986
 albums.last.artist_id # =>  3
 
+# 5
+# Update a new album
+
+repo = AlbumRepository.new
+album = repo.find(1)
+album.title = 'Antidoto'
+album.release_year = 1998
+album.artist_id = 1
+
+updated_album = repo.find(1)
+
+updated_album.title # => 'Antidoto'
+updated_album.release_year # => 1998
+updated_album.artist_id # => 1
+
 ```
 
 Encode this example as a test.
