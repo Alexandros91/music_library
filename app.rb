@@ -4,12 +4,6 @@ require_relative 'lib/album_repository'
 
 class Application
 
-  # The Application class initializer
-  # takes four arguments:
-  #  * The database name to call `DatabaseConnection.connect`
-  #  * the Kernel object as `io` (so we can mock the IO in our tests)
-  #  * the AlbumRepository object (or a double of it)
-  #  * the ArtistRepository object (or a double of it)
   def initialize(database_name, io, album_repository, artist_repository)
     DatabaseConnection.connect(database_name)
     @io = io
@@ -18,21 +12,44 @@ class Application
   end
 
   def run
-    @io.puts 'Welcome to the music library manager!'
-    # "Runs" the terminal application
-    # so it can ask the user to enter some input
-    # and then decide to run the appropriate action
-    # or behaviour.
+    welcome_message
+    response = @io.gets.chomp
+    if response == '1'
+      show_albums
+    elsif response == '2'
+     show_artists
+    else
+      error_message
+    end
 
-    # Use `@io.puts` or `@io.gets` to
-    # write output and ask for user input.
+  end
+
+  private 
+
+  def welcome_message
+    @io.puts "Welcome to the music library manager! \n\nWhat would you like to do? \n  1 - List all albums \n  2 - List all artists \n\n" 
+    @io.print "Enter your choice: "
+  end
+
+  def show_albums
+    @io.puts " \nHere is the list of albums:"
+    @album_repository.all.each do |album|
+      @io.puts " * #{album.id} - #{album.title}"
+    end
+  end
+
+  def show_artists
+    @io.puts " \nHere is the list of artists:"
+    @artist_repository.all.each do |artist|
+      @io.puts " * #{artist.id} - #{artist.name}"
+    end
+  end
+
+  def error_message
+    raise 'Enter either "1" or "2" to view albums or artists'
   end
 end
 
-# Don't worry too much about this if statement. It is basically saying "only
-# run the following code if this is the main file being run, instead of having
-# been required or loaded by another file.
-# If you want to learn more about __FILE__ and $0, see here: https://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Variables_and_Constants#Pre-defined_Variables
 if __FILE__== $0
   app = Application.new(
     'music_library',
@@ -42,33 +59,3 @@ if __FILE__== $0
   )
   app.run
 end
-
-
-
-
-
-
-
-
-
-
-
-# We need to give the database name to the method `connect`.
-# DatabaseConnection.connect('music_library')
-
-# artist_repository = ArtistRepository.new
-# album_repository = AlbumRepository.new
-
-# artist_repository.all.each do |artist|
-#   p artist
-# end
-
-# album_repository.all.each do |album|
-#   p album
-# end
-
-# artist = artist_repository.find(4)
-# album = album_repository.find(3)
-
-# puts "#{album.title} - #{album.release_year} - #{album.artist_id}"
-# puts "#{artist.name} - #{artist.genre}"

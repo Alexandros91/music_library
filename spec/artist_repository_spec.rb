@@ -63,7 +63,7 @@ RSpec.describe ArtistRepository do
       expect(artists.last.genre).to eq 'Laiko'
     end
 
-    it 'adds multiple artists in the artists table' do
+    it 'adds multiple artist in the artists table' do
       repo = ArtistRepository.new
       new_artist_1 = Artist.new
       new_artist_1.name = 'Xaris Alexiou'
