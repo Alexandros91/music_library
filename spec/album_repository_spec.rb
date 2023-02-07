@@ -55,8 +55,8 @@ RSpec.describe AlbumRepository do
   describe '#create' do
     it 'adds a new album object to the repository' do
       repo = AlbumRepository.new
+
       new_album = Album.new
-      new_album.id = 3
       new_album.title = 'O metoikos'
       new_album.release_year = 1971
       new_album.artist_id = 4
@@ -74,13 +74,11 @@ RSpec.describe AlbumRepository do
       repo = AlbumRepository.new
 
       new_album_1 = Album.new
-      new_album_1.id = 3
       new_album_1.title = 'O metoikos'
       new_album_1.release_year = 1971
       new_album_1.artist_id = 4
 
       new_album_2 = Album.new
-      new_album_2.id = 4
       new_album_2.title = 'I agapi einai zali'
       new_album_2.release_year = 1986
       new_album_2.artist_id = 3
@@ -99,6 +97,7 @@ RSpec.describe AlbumRepository do
     describe '#update' do
       it 'updates an existing album' do
         repo = AlbumRepository.new
+
         album = repo.find(1)
         album.title = 'Antidoto'
         album.release_year = 1998
@@ -114,6 +113,7 @@ RSpec.describe AlbumRepository do
 
       it 'updates some values of an existing album' do
         repo = AlbumRepository.new
+
         album = repo.find(1)
         album.title = 'I epoxi tou therismou'
         album.release_year = 2020
@@ -130,6 +130,7 @@ RSpec.describe AlbumRepository do
     describe '#delete' do
       it 'deletes an existing album from the repository' do
         repo = AlbumRepository.new
+
         album_to_delete = repo.find(1)
         repo.delete(album_to_delete)
         albums = repo.all
@@ -143,6 +144,7 @@ RSpec.describe AlbumRepository do
 
       it 'deletes both albums from the repository' do
         repo = AlbumRepository.new
+        
         album_1_to_delete = repo.find(1)
         album_2_to_delete = repo.find(2)
         
