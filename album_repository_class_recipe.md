@@ -211,21 +211,45 @@ album.artist_id # =>  1
 repo = AlbumRepository.new
 new_album = Album.new
 new_album.id = 3
-new_album.title = 'I agapi einai zali'
-new_album.release_year = 1986
-new_album.artist_id = 3
+new_album.title = 'O metoikos'
+new_album.release_year = 1971
+new_album.artist_id = 4
 repo.create(new_album)
 albums = repo.all
 
 albums.length # =>  3
 albums.last.id # =>  3
+albums.last.title # =>  'O metoikos'
+albums.last.release_year # =>  1971
+albums.last.artist_id # =>  4
+
+
+# 5
+# Create two albums
+repo = AlbumRepository.new
+new_album_1 = Album.new
+new_album_1.id = 3
+new_album_1.title = 'O metoikos'
+new_album_1.release_year = 1971
+new_album_1.artist_id = 4
+
+new_album_2 = Album.new
+new_album_2.id = 4
+new_album_2.title = 'I agapi einai zali'
+new_album_2.release_year = 1986
+new_album_2.artist_id = 3
+
+repo.create(new_album_1)
+repo.create(new_album_2)
+
+albums.length # =>  4
+albums.last.id # =>  4
 albums.last.title # =>  'I agapi einai zali'
 albums.last.release_year # =>  1986
 albums.last.artist_id # =>  3
 
-# 5
-# Update a new album
-
+# 6
+# Update an existing album
 repo = AlbumRepository.new
 album = repo.find(1)
 album.title = 'Antidoto'
@@ -238,6 +262,45 @@ updated_album.title # => 'Antidoto'
 updated_album.release_year # => 1998
 updated_album.artist_id # => 1
 
+# 7
+# Update some values of an existing album
+repo = AlbumRepository.new
+album = repo.find(1)
+album.title = 'I epoxi tou therismou'
+album.release_year = 2020
+
+repo.update(album)
+updated_album = repo.find(1)
+
+updated_album.title # => 'I epoxi tou therismou'
+updated_album.release_year # => 2020
+updated_album.artist_id # => 2
+
+# 8
+# Delete an album
+repo = AlbumRepository.new
+album_to_delete = repo.find(1)
+repo.delete(album_to_delete)
+albums = repo.all
+
+albums.length # => 1
+albums.first.id # => 2
+albums.first.title # => 'Klima Tropiko'
+albums.first.release_year # => 1996
+albums.first.artist_id # => 1
+
+# 9
+# Delete both albums
+repo = AlbumRepository.new
+album_1_to_delete = repo.find(1)
+album_2_to_delete = repo.find(2)
+
+repo.delete(album_1_to_delete)
+repo.delete(album_2_to_delete)
+
+albums = repo.all
+
+albums.length # => 0
 ```
 
 Encode this example as a test.

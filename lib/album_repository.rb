@@ -59,6 +59,12 @@ class AlbumRepository
     return nil
   end
 
-  # def delete(album)
-  # end
+  def delete(album)
+    sql = 'DELETE FROM albums WHERE id = $1;'
+    sql_params = [album.id]
+
+    DatabaseConnection.exec_params(sql, sql_params)
+
+    return nil
+  end
 end

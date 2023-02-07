@@ -127,7 +127,32 @@ RSpec.describe AlbumRepository do
       end
     end
 
+    describe '#delete' do
+      it 'deletes an existing album from the repository' do
+        repo = AlbumRepository.new
+        album_to_delete = repo.find(1)
+        repo.delete(album_to_delete)
+        albums = repo.all
 
+        expect(albums.length).to eq 1
+        expect(albums.first.id).to eq 2
+        expect(albums.first.title).to eq 'Klima Tropiko'
+        expect(albums.first.release_year).to eq 1996
+        expect(albums.first.artist_id).to eq 1
+      end
+
+      it 'deletes both albums from the repository' do
+        repo = AlbumRepository.new
+        album_1_to_delete = repo.find(1)
+        album_2_to_delete = repo.find(2)
+        
+        repo.delete(album_1_to_delete)
+        repo.delete(album_2_to_delete)
+        albums = repo.all
+
+        expect(albums.length).to eq 0
+      end
+    end
   end
  
 end

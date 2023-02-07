@@ -274,6 +274,16 @@ repo.delete(artist_to_delete)
 repo.length # => 1
 repo.first.id # => 2
 
+# 9
+# Delete both artists
+repo = ArtistRepository.new
+artist_1_to_delete = repo.find(1)
+artist_2_to_delete = repo.find(2)
+
+repo.delete(artist_1_to_delete)
+repo.delete(artist_2_to_delete)
+
+repo.length # => 0
 
 ```
 
