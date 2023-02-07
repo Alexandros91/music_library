@@ -10,12 +10,7 @@ class ArtistRepository
     artists = []
 
     result_set.each do |record|
-      artist = Artist.new
-      artist.id = record['id'].to_i
-      artist.name = record['name']
-      artist.genre = record['genre']
-
-      artists << artist
+      artists << record_to_artist_object(record)
     end
 
     return artists
@@ -28,15 +23,9 @@ class ArtistRepository
     sql_params = [id]
 
     result_set = DatabaseConnection.exec_params(sql, sql_params)
-
     record = result_set[0]
 
-    artist = Artist.new
-    artist.id = record['id'].to_i
-    artist.name = record['name']
-    artist.genre = record['genre']
-
-    return artist
+    return record_to_artist_object(record)
   end
 
 
@@ -66,4 +55,16 @@ class ArtistRepository
 
     return nil
   end
+
+  private
+
+  def record_to_artist_object(record)
+    artist = Artist.new
+    artist.id = record['id'].to_i
+    artist.name = record['name']
+    artist.genre = record['genre']
+
+    return artist
+  end
+
 end
