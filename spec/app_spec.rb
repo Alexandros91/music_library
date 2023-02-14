@@ -40,6 +40,8 @@ RSpec.describe Application do
       expect(io).to receive(:puts).with(" \nHere is the list of albums:")
       expect(io).to receive(:puts).with(" * 1 - Vavel")
       expect(io).to receive(:puts).with(" * 2 - Klima Tropiko")
+      expect(io).to receive(:puts).with(" * 3 - Oi meres tou fotos")
+      expect(io).to receive(:puts).with(" * 4 - I epomeni kinisi")
 
       application = Application.new('music_library_test', io, AlbumRepository.new, ArtistRepository.new)
       application.run

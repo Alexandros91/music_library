@@ -19,7 +19,7 @@ RSpec.describe AlbumRepository do
 
       albums = repo.all
 
-      expect(albums.length).to eq 2
+      expect(albums.length).to eq 4
 
       expect(albums.first.id).to eq 1
       expect(albums.first.title).to eq 'Vavel'
@@ -63,8 +63,8 @@ RSpec.describe AlbumRepository do
       repo.create(new_album)
       albums = repo.all
 
-      expect(albums.length).to eq 3
-      expect(albums.last.id).to eq 3
+      expect(albums.length).to eq 5
+      expect(albums.last.id).to eq 5
       expect(albums.last.title).to eq 'O metoikos'
       expect(albums.last.release_year).to eq 1971
       expect(albums.last.artist_id).to eq 4
@@ -87,8 +87,8 @@ RSpec.describe AlbumRepository do
       repo.create(new_album_2)
       albums = repo.all
 
-      expect(albums.length).to eq 4
-      expect(albums.last.id).to eq 4
+      expect(albums.length).to eq 6
+      expect(albums.last.id).to eq 6
       expect(albums.last.title).to eq 'I agapi einai zali'
       expect(albums.last.release_year).to eq 1986
       expect(albums.last.artist_id).to eq 3
@@ -135,7 +135,7 @@ RSpec.describe AlbumRepository do
         repo.delete(album_to_delete)
         albums = repo.all
 
-        expect(albums.length).to eq 1
+        expect(albums.length).to eq 3
         expect(albums.first.id).to eq 2
         expect(albums.first.title).to eq 'Klima Tropiko'
         expect(albums.first.release_year).to eq 1996
@@ -152,7 +152,7 @@ RSpec.describe AlbumRepository do
         repo.delete(album_2_to_delete)
         albums = repo.all
 
-        expect(albums.length).to eq 0
+        expect(albums.length).to eq 2
       end
     end
   end
