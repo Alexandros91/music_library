@@ -2,25 +2,15 @@ require_relative '../app.rb'
 
 RSpec.describe Application do
 
-  def reset_albums_table
-    seed_sql = File.read('spec/seeds_albums.sql')
+  def reset_albums_and_artists_table
+    seed_sql = File.read('spec/seeds_music_library_test.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
     connection.exec(seed_sql)
   end
   
   
   before(:each) do 
-    reset_albums_table
-  end
-
-  def reset_artists_table
-    seed_sql = File.read('spec/seeds_artists.sql')
-    connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
-    connection.exec(seed_sql)
-  end
-
-  before(:each) do 
-    reset_artists_table
+    reset_albums_and_artists_table
   end
 
   subject(:application) { described_class.new('music_library_test', io, AlbumRepository.new, ArtistRepository.new)}

@@ -158,6 +158,25 @@ class ArtistRepository
 
   # Doesn't need to return anything (only deletes the record).
   end
+
+  # Selects an artist record along with the associated album records
+  # given the artist ID
+  def find_with_albums(id)
+  # Executes the SQL query:
+  # SELECT artists.id AS "id",
+        #  artists.name AS "name",
+        #  artists.genre AS "genre",
+        #  albums.id AS "albums_id",
+        #  albums.title AS "title",
+        #  albums.release_year AS "release_year"
+        #  FROM artists
+        #  JOIN albums
+        #  ON albums.artist_id = artists.id
+        #  WHERE artists.id = $1;
+
+  # Returns an Artist object
+  # with the array of Album objects
+  end
 end
 ```
 
@@ -284,6 +303,18 @@ repo.delete(artist_1_to_delete)
 repo.delete(artist_2_to_delete)
 
 repo.length # => 0
+
+# 10
+# Find an artists with their associated albums
+
+repo = ArtistRepository.new
+artist = repo.find_with_albums(1)
+
+artist.name # => 'Anna Vissi'
+artist.genre # => 'Pop'
+artist.albums.length # => 2
+artist.album.first.title # => 'Klima Tropiko'
+
 
 ```
 

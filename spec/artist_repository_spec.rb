@@ -3,7 +3,7 @@ require 'artist_repository'
 RSpec.describe ArtistRepository do
 
   def reset_artists_table
-    seed_sql = File.read('spec/seeds_artists.sql')
+    seed_sql = File.read('spec/seeds_music_library_test.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
     connection.exec(seed_sql)
   end
@@ -132,6 +132,20 @@ RSpec.describe ArtistRepository do
       artists = repo.all
 
       expect(artists.length).to eq 0
+    end
+  end
+
+  describe '#find_with_albums' do
+    it 'finds the artist with related albums' do
+      repo = ArtistRepository.new
+      artist = repo.find_with_albums(1)
+
+      expect(artist.name).to eq 'Anna Vissi'
+      expect(artist.genre).to eq 'Pop'
+      expect(artist.albums.length).to eq 2
+      expect(artist.albums.first.title).to eq 'Klima Tropiko'
+      expect(artist.albums.first.id).to eq 2
+
     end
   end
 end
