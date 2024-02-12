@@ -27,7 +27,7 @@ If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
 -- EXAMPLE
--- (file: spec/seeds_albums.sql)
+-- (file: seeds/albums.sql)
 
 -- Write your SQL seed here. 
 
@@ -40,16 +40,16 @@ TRUNCATE TABLE albums RESTART IDENTITY; -- replace with your own table title.
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO albums (title, release_year, album_id) VALUES ('Klima Tropiko', '1996', '1');
-INSERT INTO albums (title, release_year, album_id) VALUES ('Vavel', '2015', '2');
-INSERT INTO albums (title, release_year, album_id) VALUES ('I Epochi Tou Therismou', '2020', '2');
-INSERT INTO albums (title, release_year, album_id) VALUES ('Kitrino Galazio', '1980', '1');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Klima Tropiko', '1996', '1');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Vavel', '2015', '2');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('I Epochi Tou Therismou', '2020', '2');
+INSERT INTO albums (title, release_year, artist_id) VALUES ('Kitrino Galazio', '1980', '1');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
 
 ```bash
-psql -h 127.0.0.1 music_library_test < seeds_albums.sql
+psql -h 127.0.0.1 music_library_test < albums.sql
 ```
 
 ## 3. Define the class titles
@@ -212,8 +212,8 @@ This is so you get a fresh table contents every time you run the test suite.
 # file: spec/album_repository_spec.rb
 
 def reset_albums_table
-  seed_sql = File.read('spec/seeds_albums.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbtitle: 'music_library_test' })
+  seed_sql = File.read('seeds/albums.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
   connection.exec(seed_sql)
 end
 

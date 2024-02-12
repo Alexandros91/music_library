@@ -27,7 +27,7 @@ If seed data is provided (or you already created it), you can skip this step.
 
 ```sql
 -- EXAMPLE
--- (file: spec/seeds_artists.sql)
+-- (file: seeds/artists.sql)
 
 -- Write your SQL seed here. 
 
@@ -47,7 +47,7 @@ INSERT INTO artists (name, genre) VALUES ('Natassa Mpofiliou', 'Entexno');
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
 
 ```bash
-psql -h 127.0.0.1 music_library_test < seeds_artists.sql
+psql -h 127.0.0.1 music_library_test < artists.sql
 ```
 
 ## 3. Define the class names
@@ -196,7 +196,7 @@ This is so you get a fresh table contents every time you run the test suite.
 # file: spec/artist_repository_spec.rb
 
 def reset_artists_table
-  seed_sql = File.read('spec/seeds_artists.sql')
+  seed_sql = File.read('seeds/artists.sql')
   connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test' })
   connection.exec(seed_sql)
 end
