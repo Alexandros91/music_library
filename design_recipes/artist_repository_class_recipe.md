@@ -179,6 +179,12 @@ artist.id # =>  1
 artist.name # =>  'Anna Vissi'
 artist.genre # =>  'Laiko'
 
+artist = repo.find(2)
+artist.id # =>  2
+artist.name # =>  'Natassa Mpofiliou'
+artist.genre # =>  'Entexno'
+
+
 # Add more examples for each method
 ```
 
