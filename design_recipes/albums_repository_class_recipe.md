@@ -195,6 +195,28 @@ album.title # =>  'Klima Tropiko'
 album.release_year # =>  '1996'
 album.artist_id # => '1'
 
+
+album = repo.find(2)
+
+album.id # =>  2
+album.title # =>  'Vavel'
+album.release_year # =>  '2015'
+album.artist_id # => '2'
+
+album = repo.find(3)
+
+album.id # =>  3
+album.title # =>  'I Epochi Tou Therismou'
+album.release_year # =>  '2020'
+album.artist_id # => '2'
+
+album = repo.find(4)
+
+album.id # =>  4
+album.title # =>  'Kitrino Galazio'
+album.release_year # =>  '1980'
+album.artist_id # => '1'
+
 # Add more examples for each method
 ```
 
