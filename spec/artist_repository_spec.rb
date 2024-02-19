@@ -49,4 +49,23 @@ RSpec.describe ArtistRepository do
     end
   end
 
+  describe '#create' do
+    it 'creates Beatles as an artist' do
+      repo = ArtistRepository.new
+
+      new_artist = Artist.new
+      new_artist.name = 'Beatles'
+      new_artist.genre = 'Pop'
+
+      repo.create(new_artist) # => nil
+
+      artists = repo.all
+      last_artist = artists.last
+      expect(artists.length).to eq 3
+      expect(last_artist.id).to eq 3
+      expect(last_artist.name).to eq 'Beatles'
+      expect(last_artist.genre).to eq 'Pop'
+    end
+  end
+
 end

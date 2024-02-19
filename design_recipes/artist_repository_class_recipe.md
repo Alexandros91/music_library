@@ -132,13 +132,31 @@ class ArtistRepository
 
   # Add more methods below for each operation you'd like to implement.
 
+    # Inserts a new artist record
+    # Takes an Artist object in argument
   # def create(artist)
+    # Executes the SQL query:
+    # INSERT INTO artists (name, genre) VALUES ($1, $2);
+  
+    # Returns nothing (only creates the Artist object)
   # end
 
+    # Updates an artist record
+    # Takes an Artist object (with the updated fields)
   # def update(artist)
+    # Executes the SQL query:
+    # UPDATE artists SET name = $1, genre = $2, WHERE id = $3;
+
+    # Returns nothing (only updates the record)
   # end
 
-  # def delete(artist)
+    # Deletes an artist record
+    # given its id
+  # def delete(id)
+    # Executes the SQL query:
+    # DELETE artists WHERE id = $1;
+
+    # Returns nothing (only deletes the record)
   # end
 end
 ```
@@ -186,6 +204,24 @@ artist.genre # =>  'Entexno'
 
 
 # Add more examples for each method
+
+# 3
+# Create a new artist
+
+repo = ArtistRepository.new
+
+artist = Artist.new
+artist.name = 'Beatles'
+artist.genre = 'Pop'
+
+repo.create(artist) # => nil
+
+artists = repo.all
+last_artist = artists.last
+artists.length # => 3
+last_artist.id # => 3
+last_artist.name # => 'Beatles'
+last_artist.genre # => 'Pop'
 ```
 
 Encode this example as a test.
