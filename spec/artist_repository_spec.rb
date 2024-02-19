@@ -94,4 +94,32 @@ RSpec.describe ArtistRepository do
       expect(artists.length).to eq 0
     end
 
+  describe 'update' do
+    it 'updates the Anna Vissi artist' do
+      repo = ArtistRepository.new
+      
+      artist_to_update = repo.find(1)
+      
+      artist_to_update.name = 'Fake Artist'
+      artist_to_update.genre = 'Fake Genre'
+
+      repo.update(artist_to_update)
+      updated_artist = repo.find(1)
+      expect(updated_artist.name).to eq 'Fake Artist'
+      expect(updated_artist.genre).to eq 'Fake Genre'
+    end
+
+    it 'updates only the name of Natassa Mpofiliou artist' do
+      repo = ArtistRepository.new
+      
+      artist_to_update = repo.find(2)
+      
+      artist_to_update.name = 'Pseudo Artist'
+
+      repo.update(artist_to_update)
+      updated_artist = repo.find(2)
+      expect(updated_artist.name).to eq 'Pseudo Artist'
+      expect(updated_artist.genre).to eq 'Entexno'
+    end
+  end
 end

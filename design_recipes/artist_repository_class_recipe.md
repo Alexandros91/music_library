@@ -242,6 +242,31 @@ artists.length # => 1
 last_artist.id # => 1
 last_artist.name # => 'Anna Vissi'
 last_artist.genre # => 'Laiko'
+
+# 6
+# Delete both artists
+
+repo = ArtistRepository.new
+
+repo.delete(1)
+repo.delete(2)
+artists = repo.all
+
+artists.length # => 0
+
+# 7
+# Update an artist
+
+repo = ArtistRepository.new
+
+updated_artist = repo.find(1)
+repo.update(updated_artist)
+
+updated_artist.name = 'Fake Artist'
+updated_artist.genre = 'Fake Genre'
+artists = repo.all
+artists.first.name # => 'Fake Artist'
+artists.first.genre # => 'Fake Genre'
 ```
 
 Encode this example as a test.
