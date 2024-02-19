@@ -83,5 +83,25 @@ RSpec.describe AlbumRepository do
         expect(album.artist_id).to eq'1'
       end
     end
+
+    describe '#create' do
+      it 'creates Revolver as a new album' do
+        repo = AlbumRepository.new
+        
+        album = Album.new
+        album.title = 'Revolver'
+        album.release_year = 1966
+        album.artist_id = 3
+        
+        repo.create(album)
+        albums = repo.all
+        
+        expect(albums.length).to eq 5
+        expect(albums.last.id).to eq 5
+        expect(albums.last.title).to eq 'Revolver'
+        expect(albums.last.release_year).to eq "1966"
+        expect(albums.last.artist_id).to eq "3"
+      end
+    end
   end
 end

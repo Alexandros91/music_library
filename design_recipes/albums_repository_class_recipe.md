@@ -134,8 +134,14 @@ class AlbumRepository
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(album)
-  # end
+    # Inserts a new album record
+    # Takes an Album object as an argument
+  def create(album)
+    # Executes the SQL query:
+    # INSERT INTO albums (title, release_year, artist_id) VALUES ($1, $2, $3);
+
+    # Returns nothing (only creates the Album record)
+  end
 
   # def update(album)
   # end
@@ -164,23 +170,23 @@ albums.length # =>  4
 
 albums[0].id # =>  1
 albums[0].title # =>  'Klima Tropiko'
-albums[0].release_year # =>  '1996'
-albums[0].artist_id # =>  '1'
+albums[0].release_year # =>  1996
+albums[0].artist_id # =>  1
 
 albums[1].id # =>  2
 albums[1].title # =>  'Vavel'
-albums[1].release_year # =>  '2015'
-albums[1].artist_id # =>  '2'
+albums[1].release_year # =>  2015
+albums[1].artist_id # =>  2
 
 albums[2].id # =>  2
 albums[2].title # =>  'I Epochi Tou Therismou'
-albums[2].release_year # =>  '2015'
-albums[2].artist_id # =>  '2'
+albums[2].release_year # =>  2015
+albums[2].artist_id # =>  2
 
 albums[3].id # =>  2
 albums[3].title # =>  'Kitrino Galazio'
-albums[3].release_year # =>  '1980'
-albums[3].artist_id # =>  '1'
+albums[3].release_year # =>  1980
+albums[3].artist_id # =>  1
 
 
 # 2
@@ -192,40 +198,66 @@ album = repo.find(1)
 
 album.id # =>  1
 album.title # =>  'Klima Tropiko'
-album.release_year # =>  '1996'
-album.artist_id # => '1'
+album.release_year # =>  1996
+album.artist_id # => 1
 
 # 3
 # Get another album
+
+repo = AlbumRepository.new
 
 album = repo.find(2)
 
 album.id # =>  2
 album.title # =>  'Vavel'
-album.release_year # =>  '2015'
-album.artist_id # => '2'
+album.release_year # =>  2015
+album.artist_id # => 2
 
 # 4
 # Get another album
+
+repo = AlbumRepository.new
 
 album = repo.find(3)
 
 album.id # =>  3
 album.title # =>  'I Epochi Tou Therismou'
-album.release_year # =>  '2020'
-album.artist_id # => '2'
+album.release_year # =>  2020
+album.artist_id # => 2
 
 # 5
 # Get another album
+
+repo = AlbumRepository.new
 
 album = repo.find(4)
 
 album.id # =>  4
 album.title # =>  'Kitrino Galazio'
-album.release_year # =>  '1980'
-album.artist_id # => '1'
+album.release_year # =>  1980
+album.artist_id # => 1
 
 # Add more examples for each method
+
+# 6
+# Create a new album
+
+repo = AlbumRepository.new
+albums = repo.all
+
+album = Album.new
+album.title = 'Revolver'
+album.release_year = 1966
+album.artist_id = 3
+
+repo.create(album)
+
+albums.length # => 5
+albums.last.id # => 5
+albums.last.title # => 'Revolver'
+albums.last.release_year # => 1966
+albums.last.artist_id # => 5
+
 ```
 
 Encode this example as a test.
