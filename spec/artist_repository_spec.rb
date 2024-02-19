@@ -68,4 +68,30 @@ RSpec.describe ArtistRepository do
     end
   end
 
+  describe '#delete' do
+    it 'deletes the artist with id 1' do
+      repo = ArtistRepository.new
+      
+      id_to_delete = 1
+      repo.delete(id_to_delete)
+      artists = repo.all
+
+      first_artist = artists.first
+      expect(artists.length).to eq 1
+      expect(first_artist.id).to eq 2
+      expect(first_artist.name).to eq 'Natassa Mpofiliou'
+      expect(first_artist.genre).to eq 'Entexno'
+    end
+  end
+
+    it 'deletes both artists' do
+      repo = ArtistRepository.new
+      
+      repo.delete(1)
+      repo.delete(2)
+
+      artists = repo.all
+      expect(artists.length).to eq 0
+    end
+
 end

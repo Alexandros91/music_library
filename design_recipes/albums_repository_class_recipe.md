@@ -195,6 +195,8 @@ album.title # =>  'Klima Tropiko'
 album.release_year # =>  '1996'
 album.artist_id # => '1'
 
+# 3
+# Get another album
 
 album = repo.find(2)
 
@@ -203,12 +205,18 @@ album.title # =>  'Vavel'
 album.release_year # =>  '2015'
 album.artist_id # => '2'
 
+# 4
+# Get another album
+
 album = repo.find(3)
 
 album.id # =>  3
 album.title # =>  'I Epochi Tou Therismou'
 album.release_year # =>  '2020'
 album.artist_id # => '2'
+
+# 5
+# Get another album
 
 album = repo.find(4)
 
