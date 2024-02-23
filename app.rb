@@ -17,10 +17,17 @@ class Application
     @io.puts ' 1 - List all albums'
     @io.puts ' 2 - List all artists'
     @io.print 'Enter your choice: '
-    @io.gets.chomp
-    @io.puts 'Here is the list of albums:'
-    @album_repository.all.each do |album|
-      @io.puts " * #{album.id} - #{album.title}"
+    num = @io.gets.chomp
+    if num == '1'
+      @io.puts 'Here is the list of albums:'
+      @album_repository.all.each do |album|
+        @io.puts " * #{album.id} - #{album.title}"
+      end
+    elsif num == '2'
+      @io.puts 'Here is the list of artists:'
+      @artist_repository.all.each do |artist|
+        @io.puts " * #{artist.id} - #{artist.name}"
+      end
     end
   end
 end

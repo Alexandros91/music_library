@@ -44,5 +44,32 @@ RSpec.describe Application do
         app.run
       end
     end
+
+    context 'when the user types 2' do
+      it 'prints the list of artists' do
+        album_repository = double :album_repository
+        artist_repository = double :artist_repository
+        allow(artist_repository).to receive(:all).and_return([
+        double(id: 1, name: 'Pixies'),
+        double(id: 2, name: 'ABBA'),
+        double(id: 3, name: 'Taylor Swift'),
+        double(id: 4, name: 'Nina Simone'),
+        ])
+        io = double :io
+        expect(io).to receive(:puts).with "Welcome to the music library manager!\n"
+        expect(io).to receive(:puts).with 'What would you like to do?'
+        expect(io).to receive(:puts).with ' 1 - List all albums'
+        expect(io).to receive(:puts).with ' 2 - List all artists'
+        expect(io).to receive(:print).with 'Enter your choice: '
+        expect(io).to receive(:gets).and_return '2'
+        expect(io).to receive(:puts).with 'Here is the list of artists:'
+        expect(io).to receive(:puts).with ' * 1 - Pixies'
+        expect(io).to receive(:puts).with ' * 2 - ABBA'
+        expect(io).to receive(:puts).with ' * 3 - Taylor Swift'
+        expect(io).to receive(:puts).with ' * 4 - Nina Simone'
+        app = Application.new('music_library_test', io, album_repository, artist_repository)
+        app.run
+      end
+    end
   end
 end
