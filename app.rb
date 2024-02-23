@@ -2,21 +2,36 @@ require_relative 'lib/database_connection'
 require_relative 'lib/artist_repository'
 require_relative 'lib/album_repository'
 
-DatabaseConnection.connect('music_library')
+class Application
 
-artist_repository = ArtistRepository.new
-album_repository = AlbumRepository.new
+  def initialize(database_name, io, album_repository, artist_repository)
+    DatabaseConnection.connect(database_name)
+    @io = io
+    @album_repository = album_repository
+    @artist_repository = artist_repository
+  end
 
-# artist_repository.all.each do |artist|
-#   p artist
-# end
+  def run
+    @io.puts "Welcome to the music library manager!\n"
+    @io.puts 'What would you like to do?'
+    @io.puts ' 1 - List all albums'
+    @io.puts ' 2 - List all artists'
+    @io.print 'Enter your choice: '
+    @io.gets.chomp
+    @io.puts 'Here is the list of albums:'
+    @album_repository.all.each do |album|
+      @io.puts " * #{album.id} - #{album.title}"
+    end
+  end
+end
 
-# album_repository.all.each do |album|
-#   p album
-# end
+if __FILE__ == $0
+  app = Application.new(
+    'music_library',
+    Kernel,
+    AlbumRepository.new,
+    ArtistRepository.new
+  )
+  app.run
+end
 
-artist = artist_repository.find(4)
-puts artist.name
-
-album = album_repository.find(3)
-puts "#{album.id} - #{album.title} - #{album.release_year}"
