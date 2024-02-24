@@ -82,7 +82,6 @@ RSpec.describe ArtistRepository do
       expect(first_artist.name).to eq 'Natassa Mpofiliou'
       expect(first_artist.genre).to eq 'Entexno'
     end
-  end
 
     it 'deletes both artists' do
       repo = ArtistRepository.new
@@ -93,6 +92,7 @@ RSpec.describe ArtistRepository do
       artists = repo.all
       expect(artists.length).to eq 0
     end
+  end
 
   describe 'update' do
     it 'updates the Anna Vissi artist' do
@@ -120,6 +120,19 @@ RSpec.describe ArtistRepository do
       updated_artist = repo.find(2)
       expect(updated_artist.name).to eq 'Pseudo Artist'
       expect(updated_artist.genre).to eq 'Entexno'
+    end
+  end
+
+  describe '#find_with_albums' do
+    it 'returns an artist record qith their associated albums' do
+      repo = ArtistRepository.new
+
+      artist = repo.find_with_albums(1)
+
+      expect(artist.id).to eq 1
+      expect(artist.name).to eq 'Anna Vissi'
+      expect(artist.genre).to eq 'Laiko'
+      expect(artist.albums.length).to eq 2 
     end
   end
 end

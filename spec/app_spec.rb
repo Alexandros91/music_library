@@ -6,18 +6,10 @@ RSpec.describe Application do
       it 'prints the list of albums' do
         album_repository = double :album_repository
         allow(album_repository).to receive(:all).and_return([
-          double(id: 1, title: 'Doolittle'),
-          double(id: 2, title: 'Surfer Rosa'),
-          double(id: 3, title: 'Waterloo'),
-          double(id: 4, title: 'Super Trouper'),
-          double(id: 5, title: 'Bossanova'),
-          double(id: 6, title: 'Lover'),
-          double(id: 7, title: 'Folklore'),
-          double(id: 8, title: 'I Put a Spell on You'),
-          double(id: 9, title: 'Baltimore'),
-          double(id: 10, title: 'Here Comes the Sun'),
-          double(id: 11, title: 'Fodder on My Wings'),
-          double(id: 12, title: 'Ring Ring'),
+          double(id: 1, title: 'Klima Tropiko'),
+          double(id: 2, title: 'Vavel'),
+          double(id: 3, title: 'I Epochi Tou Therismou'),
+          double(id: 4, title: 'Kitrino Galazio'),
         ])
         artist_repository = double :artist_repository
         io = double :io
@@ -28,18 +20,10 @@ RSpec.describe Application do
         expect(io).to receive(:print).with 'Enter your choice: '
         expect(io).to receive(:gets).and_return '1'
         expect(io).to receive(:puts).with 'Here is the list of albums:'
-        expect(io).to receive(:puts).with ' * 1 - Doolittle'
-        expect(io).to receive(:puts).with ' * 2 - Surfer Rosa'
-        expect(io).to receive(:puts).with ' * 3 - Waterloo'
-        expect(io).to receive(:puts).with ' * 4 - Super Trouper'
-        expect(io).to receive(:puts).with ' * 5 - Bossanova'
-        expect(io).to receive(:puts).with ' * 6 - Lover'
-        expect(io).to receive(:puts).with ' * 7 - Folklore'
-        expect(io).to receive(:puts).with ' * 8 - I Put a Spell on You'
-        expect(io).to receive(:puts).with ' * 9 - Baltimore'
-        expect(io).to receive(:puts).with ' * 10 - Here Comes the Sun'
-        expect(io).to receive(:puts).with ' * 11 - Fodder on My Wings'
-        expect(io).to receive(:puts).with ' * 12 - Ring Ring'
+        expect(io).to receive(:puts).with ' * 1 - Klima Tropiko'
+        expect(io).to receive(:puts).with ' * 2 - Vavel'
+        expect(io).to receive(:puts).with ' * 3 - I Epochi Tou Therismou'
+        expect(io).to receive(:puts).with ' * 4 - Kitrino Galazio'
         app = Application.new('music_library_test', io, album_repository, artist_repository)
         app.run
       end
@@ -50,10 +34,8 @@ RSpec.describe Application do
         album_repository = double :album_repository
         artist_repository = double :artist_repository
         allow(artist_repository).to receive(:all).and_return([
-        double(id: 1, name: 'Pixies'),
-        double(id: 2, name: 'ABBA'),
-        double(id: 3, name: 'Taylor Swift'),
-        double(id: 4, name: 'Nina Simone'),
+        double(id: 1, name: 'Anna Vissi'),
+        double(id: 2, name: 'Natassa Mpofiliou'),
         ])
         io = double :io
         expect(io).to receive(:puts).with "Welcome to the music library manager!\n"
@@ -63,10 +45,8 @@ RSpec.describe Application do
         expect(io).to receive(:print).with 'Enter your choice: '
         expect(io).to receive(:gets).and_return '2'
         expect(io).to receive(:puts).with 'Here is the list of artists:'
-        expect(io).to receive(:puts).with ' * 1 - Pixies'
-        expect(io).to receive(:puts).with ' * 2 - ABBA'
-        expect(io).to receive(:puts).with ' * 3 - Taylor Swift'
-        expect(io).to receive(:puts).with ' * 4 - Nina Simone'
+        expect(io).to receive(:puts).with ' * 1 - Anna Vissi'
+        expect(io).to receive(:puts).with ' * 2 - Natassa Mpofiliou'
         app = Application.new('music_library_test', io, album_repository, artist_repository)
         app.run
       end

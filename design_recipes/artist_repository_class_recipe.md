@@ -158,6 +158,25 @@ class ArtistRepository
 
     # Returns nothing (only updates the record)
   # end
+
+  # Finds an artist record along with the associated albums
+  # given its id
+  # def find_with_albums(artist_id)
+    # Executes the SQL query:
+    # 'SELECT 
+    # artists.id AS "artist_id",
+    # name AS "asrtist_name",
+    # genre,
+    # albums.id AS "album_id",
+    # albums.title AS "album_title",
+    # albums.release_year
+    # FROM artists
+    # JOIN albums
+    # ON artist_id = artists.id
+    # WHERE artists.id = 1;'
+
+    # Returns the first artist with all their albums
+  # end
 end
 ```
 
@@ -267,6 +286,18 @@ updated_artist.genre = 'Fake Genre'
 artists = repo.all
 artists.first.name # => 'Fake Artist'
 artists.first.genre # => 'Fake Genre'
+
+# 8
+# Find an artist with their albums
+
+repo = ArtistRepository.new
+
+artist = find_with_albums(1)
+
+artist.id # => 1
+artist.name # => 'Anna Vissi'
+artist.genre # => 'Laiko'
+artist.albums.length # => 2 
 ```
 
 Encode this example as a test.
